@@ -16,13 +16,18 @@ var World = (function () {
         var owner = options.owner || {
 
             name : 'player',
-            typePoints : {
+            typePoints : [{
+                    landType : 'desart',
+                    points : 90
+                }, {
+                    landType : 'rural',
+                    points : 9
+                }, {
+                    landType : 'urban',
+                    points : 1
+                }
 
-                desart : 100,
-                rural : 9,
-                urban : 1
-
-            }
+            ]
 
         };
 
@@ -40,12 +45,47 @@ var World = (function () {
     // set the parcels values with the given owner object
     Parcel.prototype.setWithOwnerObj = function (owner) {
 
-        var totalPoints = 0;
-        Object.keys(owner.typePoints).forEach(function (landTypeName) {
+        var totalPoints = 0,
+        roll;
 
-            console.log(landTypeName);
+        // sort typePoints with lowest first
+        owner.typePoints = owner.typePoints.sort(function (a, b) {
 
-        })
+                return a.points > b.points;
+
+            });
+
+        console.log(owner.typePoints);
+
+        // find total points
+        owner.typePoints.forEach(function (ltp) {
+
+            totalPoints += ltp.points;
+
+        });
+
+        // make a roll between 0 and total points
+        roll = Math.floor(Math.random() * totalPoints);
+
+        var i = 0,
+        len = owner.typePoints.length,
+        landType = 'none';
+        while (i < len) {
+
+            if (roll < owner.typePoints[i].points) {
+
+                landType = owner.typePoints[i].landType;
+
+                break;
+            }
+
+            i += 1;
+
+        }
+
+        console.log('total points: ' + totalPoints);
+        console.log('roll: ' + roll);
+        console.log(landType);
 
     }
 
