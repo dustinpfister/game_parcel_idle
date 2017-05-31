@@ -68,13 +68,17 @@ var World = (function () {
         roll = Math.floor(Math.random() * totalPoints);
 
         var i = 0,
-        len = owner.typePoints.length,
-        landType = 'none';
+        len = owner.typePoints.length;
+
+        // default to the last type in the list
+        this.landType = owner.typePoints[owner.typePoints.length - 1].landType;
+
+        // find the type.
         while (i < len) {
 
             if (roll < owner.typePoints[i].points) {
 
-                landType = owner.typePoints[i].landType;
+                this.landType = owner.typePoints[i].landType;
 
                 break;
             }
@@ -85,7 +89,7 @@ var World = (function () {
 
         console.log('total points: ' + totalPoints);
         console.log('roll: ' + roll);
-        console.log(landType);
+        console.log(this.landType);
 
     }
 
@@ -117,5 +121,3 @@ var World = (function () {
 
 }
     ());
-
-World.addParcel();
