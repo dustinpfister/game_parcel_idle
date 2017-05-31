@@ -13,12 +13,41 @@ var World = (function () {
     // the parcle class
     var Parcel = function (options) {
 
-        this.owner = options.owner || 'player';
+        var owner = options.owner || {
+
+            name : 'player',
+            typePoints : {
+
+                desart : 100,
+                rural : 9,
+                urban : 1
+
+            }
+
+        };
+
+        options = options || {};
+
+        this.landType = 'none';
         this.landValue = 0;
         this.size = 1000;
         this.perTick = 0;
 
+        this.setWithOwnerObj(owner);
+
     };
+
+    // set the parcels values with the given owner object
+    Parcel.prototype.setWithOwnerObj = function (owner) {
+
+        var totalPoints = 0;
+        Object.keys(owner.typePoints).forEach(function (landTypeName) {
+
+            console.log(landTypeName);
+
+        })
+
+    }
 
     var api = function () {
 
@@ -29,6 +58,8 @@ var World = (function () {
     api.addParcel = function (options) {
 
         var parcel;
+
+        options = options || {};
 
         // if we have not reached max parcels, we can make a new one
         if (state.parcels.length < state.maxParcel) {
@@ -47,8 +78,4 @@ var World = (function () {
 }
     ());
 
-World.addParcel({
-
-    owner : 'player'
-
-});
+World.addParcel();
