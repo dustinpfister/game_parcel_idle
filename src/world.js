@@ -14,20 +14,7 @@ var World = (function () {
         // all land parcel instances
         parcels : [],
 
-        setParcelCost : function () {
-
-            this.parcelCost = Math.pow(16, this.parcels.length);
-
-        }
-
-    };
-
-    state.setParcelCost();
-
-    // the parcle class
-    var Parcel = function (options) {
-
-        var owner = options.owner || {
+        buyerObj : {
 
             name : 'player',
             typePoints : [{
@@ -43,36 +30,50 @@ var World = (function () {
 
             ]
 
-        };
+        },
 
-        options = options || {};
+        setParcelCost : function () {
+
+            this.parcelCost = Math.pow(16, this.parcels.length);
+
+        }
+
+    };
+
+    state.setParcelCost();
+
+    // the parcle class
+    var Parcel = function () {
 
         this.landType = 'none';
         this.landValue = 0;
         this.size = 1000;
         this.perTick = 1;
 
-        this.setWithOwnerObj(owner);
+        this.findLandType();
 
     };
 
-    // set the parcels values with the given owner object
-    Parcel.prototype.setWithOwnerObj = function (owner) {
+    // set the land type depending on a buyer object
+    Parcel.prototype.findLandType = function (buyerObj) {
 
         var totalPoints = 0,
         roll;
 
+        // use the hard hoded buyerOBJ by default
+        buyerObj = buyerObj || state.buyerObj;
+
         // sort typePoints with lowest first
-        owner.typePoints = owner.typePoints.sort(function (a, b) {
+        buyerObj.typePoints = buyerObj.typePoints.sort(function (a, b) {
 
                 return a.points > b.points;
 
             });
 
-        console.log(owner.typePoints);
+        console.log(buyerObj.typePoints);
 
         // find total points
-        owner.typePoints.forEach(function (ltp) {
+        buyerObj.typePoints.forEach(function (ltp) {
 
             totalPoints += ltp.points;
 
@@ -82,17 +83,17 @@ var World = (function () {
         roll = Math.floor(Math.random() * totalPoints);
 
         var i = 0,
-        len = owner.typePoints.length;
+        len = buyerObj.typePoints.length;
 
         // default to the last type in the list
-        this.landType = owner.typePoints[owner.typePoints.length - 1].landType;
+        this.landType = buyerObj.typePoints[buyerObj.typePoints.length - 1].landType;
 
         // find the type.
         while (i < len) {
 
-            if (roll < owner.typePoints[i].points) {
+            if (roll < buyerObj.typePoints[i].points) {
 
-                this.landType = owner.typePoints[i].landType;
+                this.landType = buyerObj.typePoints[i].landType;
 
                 break;
             }
@@ -101,8 +102,6 @@ var World = (function () {
 
         }
 
-        console.log('total points: ' + totalPoints);
-        console.log('roll: ' + roll);
         console.log(this.landType);
 
     }
@@ -113,17 +112,17 @@ var World = (function () {
 
     };
 
-    api.addParcel = function (options) {
+    api.addParcel = function (buyerObj) {
 
         var parcel;
 
-        options = options || {};
+        buyerObj = buyerObj || {};
 
         // if we have not reached max parcels, we can make a new one
         if (state.parcels.length < state.maxParcel) {
 
             // make the parcel
-            parcel = new Parcel(options);
+            parcel = new Parcel(buyerObj);
 
             state.parcels.push(parcel);
 
@@ -132,7 +131,7 @@ var World = (function () {
     };
 
     //
-    api.buyParcel = function () {
+    api.buyParcel = function (buyerObj) {
 
         if (state.money >= state.parcelCost && state.parcels.length < state.maxParcel) {
 
