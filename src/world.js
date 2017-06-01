@@ -3,8 +3,9 @@ var World = (function () {
     // the current state pf the world
     var state = {
 
-	    money : 1000,
-	
+        money : 1,
+        parcelCost : 1,
+
         maxParcel : 10,
 
         // all land parcel instances
@@ -114,6 +115,18 @@ var World = (function () {
             parcel = new Parcel(options);
 
             state.parcels.push(parcel);
+
+        }
+
+    };
+
+    //
+    api.buyParcel = function () {
+
+        if (state.money >= state.parcelCost && state.parcels.length < state.maxParcel) {
+
+            state.money -= state.parcelCost;
+            api.addParcel();
 
         }
 
