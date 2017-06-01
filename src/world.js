@@ -3,6 +3,8 @@ var World = (function () {
     // the current state pf the world
     var state = {
 
+	    money : 1000,
+	
         maxParcel : 10,
 
         // all land parcel instances
