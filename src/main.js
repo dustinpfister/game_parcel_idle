@@ -1,30 +1,12 @@
 
 // my simple stupid get method
-var get = function(id){
-	
-	return document.getElementById(id);
-	
-};
+var get = function (id) {
 
-var loop = function () {
-
-    setTimeout(loop);
-
-    get('disp').innerHTML = 'money: ' + World().money;
-	
-	get('button_buy_parcel').value = 'Buy Parcel ( ' + World().parcelCost + ' ) ';
-	
-	World.update();
+    return document.getElementById(id);
 
 };
 
-loop();
-
-document.getElementById('button_buy_parcel').addEventListener('click', function () {
-
-    console.log('buying parcel');
-
-    World.buyParcel();
+var displayParcels = function () {
 
     var parcels = World().parcels;
 
@@ -37,5 +19,29 @@ document.getElementById('button_buy_parcel').addEventListener('click', function 
     });
 
     document.getElementById('gamearea').innerHTML = html;
+
+};
+
+var loop = function () {
+
+    setTimeout(loop);
+
+    get('disp').innerHTML = 'money: ' + World().money;
+
+    get('button_buy_parcel').value = 'Buy Parcel ( ' + World().parcelCost + ' ) ';
+
+    World.update();
+
+};
+
+loop();
+
+document.getElementById('button_buy_parcel').addEventListener('click', function () {
+
+    console.log('buying parcel');
+
+    World.buyParcel();
+
+    displayParcels();
 
 });

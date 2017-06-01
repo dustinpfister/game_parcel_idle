@@ -7,7 +7,7 @@ var World = (function () {
         parcelCost : 1,
 
         lastTick : new Date(),
-        tickTime : 3000,
+        tickTime : 1000,
 
         maxParcel : 3,
 
@@ -68,7 +68,7 @@ var World = (function () {
     // the parcle class
     var Parcel = function () {
 
-        this.id = new Date().getTime();
+        this.id = new Date().getTime() + '';
         this.landType = 'none';
         this.landValue = 0;
         this.size = 1000;
@@ -219,7 +219,26 @@ var World = (function () {
 
     };
 
-    api.sellParcel
+    api.sellParcel = function (id) {
+
+        var i = state.parcels.length;
+        while (i--) {
+
+            if (state.parcels[i].id === id){
+				
+			    state.money += state.parcels[i].landValue;
+				
+				state.parcels.splice(i,1);
+
+                return state.parcels[i];
+
+            }
+
+        }
+
+        return {};
+
+    }
 
     return api;
 
