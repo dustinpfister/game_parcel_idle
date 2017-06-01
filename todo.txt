@@ -17,9 +17,9 @@
     ]
 
 }
-
 * once land type is found, the size of the parcel, and it's perSize value, are set.
 
 * time to next game tick bar, will display the amount of time to next game tick
+* html interface for each land parcel
 * a player can sell a parcel for it's value
 

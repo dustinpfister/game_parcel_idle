@@ -68,6 +68,7 @@ var World = (function () {
     // the parcle class
     var Parcel = function () {
 
+        this.id = new Date().getTime();
         this.landType = 'none';
         this.landValue = 0;
         this.size = 1000;
@@ -207,6 +208,9 @@ var World = (function () {
 
             });
 
+            // cut to cents
+            state.money = Number(state.money.toFixed(2));
+
             state.setParcelCost();
 
             state.lastTick = new Date();
@@ -214,6 +218,8 @@ var World = (function () {
         }
 
     };
+
+    api.sellParcel
 
     return api;
 
