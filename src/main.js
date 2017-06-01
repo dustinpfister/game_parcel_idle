@@ -40,7 +40,11 @@ document.getElementById('button_buy_parcel').addEventListener('click', function 
 
     console.log('buying parcel');
 
-    World.buyParcel();
+    World.buyParcel(function (success) {
+
+        console.log(success);
+
+    });
 
     displayParcels();
 

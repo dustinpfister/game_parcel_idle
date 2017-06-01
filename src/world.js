@@ -122,8 +122,6 @@ var World = (function () {
 
             });
 
-        console.log(buyerObj.typePoints);
-
         // find total points
         buyerObj.typePoints.forEach(function (ltp) {
 
@@ -154,8 +152,6 @@ var World = (function () {
 
         }
 
-        console.log(this.landType);
-
     }
 
     var api = function () {
@@ -183,7 +179,9 @@ var World = (function () {
     };
 
     //
-    api.buyParcel = function (buyerObj) {
+    api.buyParcel = function (done) {
+
+        done = done || function () {};
 
         if (state.money >= state.parcelCost && state.parcels.length < state.maxParcel) {
 
@@ -191,6 +189,12 @@ var World = (function () {
             api.addParcel();
 
             state.setParcelCost();
+
+            done(true);
+
+        } else {
+
+            done(false);
 
         }
 
@@ -224,11 +228,11 @@ var World = (function () {
         var i = state.parcels.length;
         while (i--) {
 
-            if (state.parcels[i].id === id){
-				
-			    state.money += state.parcels[i].landValue;
-				
-				state.parcels.splice(i,1);
+            if (state.parcels[i].id === id) {
+
+                state.money += state.parcels[i].landValue;
+
+                state.parcels.splice(i, 1);
 
                 return state.parcels[i];
 
