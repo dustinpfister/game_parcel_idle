@@ -41,13 +41,13 @@ var World = (function () {
                 rural : {
 
                     size : 20,
-                    perSize : .25
+                    perSize : 1.25
 
                 },
                 urban : {
 
-                    size : 3,
-                    perSize : 1
+                    size : 8,
+                    perSize : 10
 
                 }
 
@@ -160,37 +160,27 @@ var World = (function () {
 
     };
 
-    api.addParcel = function (buyerObj) {
-
-        var parcel;
-
-        buyerObj = buyerObj || {};
-
-        // if we have not reached max parcels, we can make a new one
-        if (state.parcels.length < state.maxParcel) {
-
-            // make the parcel
-            parcel = new Parcel(buyerObj);
-
-            state.parcels.push(parcel);
-
-        }
-
-    };
-
     //
     api.buyParcel = function (done) {
+
+        var parcel,
+		
+		buyerObj = state.buyerObj;
 
         done = done || function () {};
 
         if (state.money >= state.parcelCost && state.parcels.length < state.maxParcel) {
 
             state.money -= state.parcelCost;
-            api.addParcel();
+
+            // make the parcel
+            parcel = new Parcel(buyerObj);
+
+            state.parcels.push(parcel);
 
             state.setParcelCost();
 
-            done(true);
+            done(true, parcel);
 
         } else {
 

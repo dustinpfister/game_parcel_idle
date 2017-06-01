@@ -6,6 +6,34 @@ var get = function (id) {
 
 };
 
+var injectParcelUI = function (parcel) {
+
+    var display = ['id','landType','size','landValue','perSize','perTick'];
+
+    var container = document.createElement('div');
+    container.id = 'parcel_' + parcel.id;
+    container.className = 'parcel_container';
+
+    var field;
+    for (var prop in parcel) {
+
+        if (display.indexOf(prop) != -1) {
+
+            field = document.createElement('span');
+
+            field.innerHTML = prop + ': ' + parcel[prop] + ' <br>';
+
+            container.appendChild(field);
+
+        }
+
+    }
+
+    // append to container
+    get('parcels_html').appendChild(container);
+
+};
+
 var displayParcels = function () {
 
     var parcels = World().parcels;
@@ -18,7 +46,7 @@ var displayParcels = function () {
 
     });
 
-    document.getElementById('gamearea').innerHTML = html;
+    document.getElementById('parcels_raw').innerHTML = html;
 
 };
 
@@ -40,12 +68,18 @@ document.getElementById('button_buy_parcel').addEventListener('click', function 
 
     console.log('buying parcel');
 
-    World.buyParcel(function (success) {
+    World.buyParcel(function (success, parcel) {
 
         console.log(success);
 
+        if (success) {
+
+            injectParcelUI(parcel);
+
+        }
+
     });
 
-    displayParcels();
+    //displayParcels();
 
 });
