@@ -12,9 +12,17 @@ var World = (function () {
         maxParcel : 3,
 
         // all land parcel instances
-        parcels : []
+        parcels : [],
+
+        setParcelCost : function () {
+
+            this.parcelCost = Math.pow(16, this.parcels.length);
+
+        }
 
     };
+
+    state.setParcelCost();
 
     // the parcle class
     var Parcel = function (options) {
@@ -131,6 +139,8 @@ var World = (function () {
             state.money -= state.parcelCost;
             api.addParcel();
 
+            state.setParcelCost();
+
         }
 
     };
@@ -146,8 +156,10 @@ var World = (function () {
                 state.money += parcel.perTick;
 
             });
-			
-			state.lastTick = new Date();
+
+            state.setParcelCost();
+
+            state.lastTick = new Date();
 
         }
 
