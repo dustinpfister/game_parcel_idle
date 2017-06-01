@@ -50,7 +50,22 @@ var World = (function () {
         this.size = 1000;
         this.perTick = 1;
 
+        // find the land type
         this.findLandType();
+
+        // set the size
+        this.setSize();
+
+        // update the land value
+        this.updateValue();
+
+    };
+
+    Parcel.prototype.setSize = function () {}
+
+    Parcel.prototype.updateValue = function () {
+
+        this.landValue = this.size * 1;
 
     };
 
