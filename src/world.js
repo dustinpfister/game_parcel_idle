@@ -6,7 +6,10 @@ var World = (function () {
         money : 1,
         parcelCost : 1,
 
-        maxParcel : 10,
+        lastTick : new Date(),
+        tickTime : 3000,
+
+        maxParcel : 3,
 
         // all land parcel instances
         parcels : []
@@ -39,7 +42,7 @@ var World = (function () {
         this.landType = 'none';
         this.landValue = 0;
         this.size = 1000;
-        this.perTick = 0;
+        this.perTick = 1;
 
         this.setWithOwnerObj(owner);
 
@@ -127,6 +130,24 @@ var World = (function () {
 
             state.money -= state.parcelCost;
             api.addParcel();
+
+        }
+
+    };
+
+    api.update = function () {
+
+        var now = new Date();
+
+        if (now - state.lastTick >= state.tickTime) {
+
+            state.parcels.forEach(function (parcel) {
+
+                state.money += parcel.perTick;
+
+            });
+			
+			state.lastTick = new Date();
 
         }
 

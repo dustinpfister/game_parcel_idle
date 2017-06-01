@@ -4,6 +4,8 @@ var loop = function () {
     setTimeout(loop);
 
     document.getElementById('disp').innerHTML = 'money: ' + World().money;
+	
+	World.update();
 
 };
 
