@@ -6,16 +6,20 @@ var get = function (id) {
 
 };
 
+// inject a parcel UI
 var injectParcelUI = function (parcel) {
 
-    var display = ['id','landType','size','landValue','perSize','perTick'];
+    var display = ['id', 'landType', 'size', 'landValue', 'perSize', 'perTick'],
 
-    var container = document.createElement('div');
+    field,
+    prop,
+    button_sell = document.createElement('input'),
+    container = document.createElement('div');
+
     container.id = 'parcel_' + parcel.id;
     container.className = 'parcel_container';
 
-    var field;
-    for (var prop in parcel) {
+    for (prop in parcel) {
 
         if (display.indexOf(prop) != -1) {
 
@@ -28,6 +32,21 @@ var injectParcelUI = function (parcel) {
         }
 
     }
+
+    button_sell.value = 'Sell';
+    button_sell.type = 'button';
+    button_sell.addEventListener('click', function (e) {
+
+        console.log('yes this is dog');
+		console.log();
+		
+		World.sellParcel(e.target.parentNode.id.split('_')[1]);
+		e.target.parentNode.remove();
+
+
+    });
+
+    container.appendChild(button_sell);
 
     // append to container
     get('parcels_html').appendChild(container);
