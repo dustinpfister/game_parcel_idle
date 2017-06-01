@@ -1,9 +1,18 @@
 
+// my simple stupid get method
+var get = function(id){
+	
+	return document.getElementById(id);
+	
+};
+
 var loop = function () {
 
     setTimeout(loop);
 
-    document.getElementById('disp').innerHTML = 'money: ' + World().money;
+    get('disp').innerHTML = 'money: ' + World().money;
+	
+	get('button_buy_parcel').value = 'Buy Parcel ( ' + World().parcelCost + ' ) ';
 	
 	World.update();
 
