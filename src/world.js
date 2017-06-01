@@ -100,6 +100,9 @@ var World = (function () {
         // land value
         this.landValue = this.size * this.perSize;
 
+        // just 10% of land value for now
+        this.perTick = Number((this.landValue * .1).toFixed(2));
+
     };
 
     // set the land type depending on a buyer object
