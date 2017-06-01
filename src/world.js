@@ -28,7 +28,30 @@ var World = (function () {
                     points : 1
                 }
 
-            ]
+            ],
+
+            landTypes : {
+
+                desart : {
+
+                    size : 90,
+                    perSize : .1
+
+                },
+                rural : {
+
+                    size : 20,
+                    perSize : .25
+
+                },
+                urban : {
+
+                    size : 3,
+                    perSize : 1
+
+                }
+
+            }
 
         },
 
@@ -61,11 +84,21 @@ var World = (function () {
 
     };
 
-    Parcel.prototype.setSize = function () {}
+    Parcel.prototype.setSize = function (buyerObj) {
+
+        buyerObj = buyerObj || state.buyerObj;
+
+        // set size by land type
+        this.size = buyerObj.landTypes[this.landType].size;
+
+        this.perSize = buyerObj.landTypes[this.landType].perSize;
+
+    }
 
     Parcel.prototype.updateValue = function () {
 
-        this.landValue = this.size * 1;
+        // land value
+        this.landValue = this.size * this.perSize;
 
     };
 

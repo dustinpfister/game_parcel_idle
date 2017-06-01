@@ -4,12 +4,7 @@
 * player can buy a land parcel with money
 * a "game tick" is every 3 seconds
 * a land parcel generates a certain amount of money per game tick
-
-* time to next game tick bar, will display the amount of time to next game tick
-* a player can sell a parcel for it's value
-
 * a "buyer object" helps to determine things about the starting parcel
-
 {
     // the name of the buyer
     name : 'player',
@@ -22,3 +17,9 @@
     ]
 
 }
+
+* once land type is found, the size of the parcel, and it's perSize value, are set.
+
+* time to next game tick bar, will display the amount of time to next game tick
+* a player can sell a parcel for it's value
+
