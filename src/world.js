@@ -240,6 +240,8 @@ var World = (function () {
 
     };
 
+	
+	
     api.sellParcel = function (id) {
 
         var i = state.parcels.length;

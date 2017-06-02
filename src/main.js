@@ -24,6 +24,7 @@ var injectParcelUI = function (parcel) {
         if (display.indexOf(prop) != -1) {
 
             field = document.createElement('span');
+            field.id = 'parcel_' + prop + '_' + parcel.id;
 
             field.innerHTML = prop + ': ' + parcel[prop] + ' <br>';
 
@@ -55,6 +56,15 @@ var injectParcelUI = function (parcel) {
 var updateUI = function () {
 
     console.log('update ui');
+    var parcels = document.getElementsByClassName('parcel_container');
+
+    [].forEach.call(parcels, function (parcel) {
+
+		var ticks = document.getElementById('parcel_ticks_' + parcel.id.split('_')[1]);
+		
+		console.log(ticks)
+
+    })
 
 };
 
