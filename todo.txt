@@ -5,27 +5,27 @@
 * a "game tick" is every 3 seconds
 * a land parcel generates a certain amount of money per game tick
 * a "buyer object" helps to determine things about the starting parcel
-{
-    // the name of the buyer
-    name : 'player',
-
-    // typePoints determine the probability of each landType
-    typePoints : [
-        { landType : 'desart', points : 90 },
-        { landType : 'rural', points : 9 },
-        { landType : 'urban', points : 1 }
-    ]
-
-}
 * once land type is found, the size of the parcel, and it's perSize value, are set.
 * sell land parcel method
-
-
-* time to next game tick bar, will display the amount of time to next game tick
 * html interface for each land parcel
-
 * clicking the buy parcel button creates an instance of a landParcel HTML template
 * clicking the sell parcel button destroys an instance of landParcel HTML template
+
+
+1.0.x
+
+* new parcel module separate from world module
+
+buying land parcels:
+* A player can now buy a parcel from three options that are available to buy.
+* 
+
+* time to next game tick bar, will display the amount of time to next game tick
+* away production
+* auto save
+
+
+
 
 
 
