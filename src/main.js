@@ -9,7 +9,7 @@ var get = function (id) {
 // inject a parcel UI
 var injectParcelUI = function (parcel) {
 
-    var display = ['id', 'landType', 'size', 'landValue', 'perSize', 'perTick'],
+    var display = ['id', 'landType', 'size', 'landValue', 'perSize', 'perTick', 'ticks'],
 
     field,
     prop,
@@ -38,11 +38,10 @@ var injectParcelUI = function (parcel) {
     button_sell.addEventListener('click', function (e) {
 
         console.log('yes this is dog');
-		console.log();
-		
-		World.sellParcel(e.target.parentNode.id.split('_')[1]);
-		e.target.parentNode.remove();
+        console.log();
 
+        World.sellParcel(e.target.parentNode.id.split('_')[1]);
+        e.target.parentNode.remove();
 
     });
 
@@ -50,6 +49,12 @@ var injectParcelUI = function (parcel) {
 
     // append to container
     get('parcels_html').appendChild(container);
+
+};
+
+var updateUI = function () {
+
+    console.log('update ui');
 
 };
 
@@ -68,6 +73,12 @@ var displayParcels = function () {
     document.getElementById('parcels_raw').innerHTML = html;
 
 };
+
+World.addOnTick(function () {
+
+    updateUI();
+
+});
 
 var loop = function () {
 

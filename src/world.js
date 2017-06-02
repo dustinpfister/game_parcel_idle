@@ -61,7 +61,10 @@ var World = (function () {
 
         }
 
-    };
+    },
+
+    // tick events
+    tickEvents = [];
 
     state.setParcelCost();
 
@@ -74,6 +77,9 @@ var World = (function () {
         this.size = 1000;
         this.perTick = 1;
 
+        // game ticks
+        this.ticks = 0;
+
         // find the land type
         this.findLandType();
 
@@ -85,6 +91,14 @@ var World = (function () {
 
     };
 
+    // parcel update method
+    Parcel.prototype.update = function () {
+
+        this.ticks += 1;
+
+    };
+
+    // set the size of the parcel
     Parcel.prototype.setSize = function (buyerObj) {
 
         buyerObj = buyerObj || state.buyerObj;
@@ -164,8 +178,8 @@ var World = (function () {
     api.buyParcel = function (done) {
 
         var parcel,
-		
-		buyerObj = state.buyerObj;
+
+        buyerObj = state.buyerObj;
 
         done = done || function () {};
 
@@ -199,6 +213,7 @@ var World = (function () {
             state.parcels.forEach(function (parcel) {
 
                 state.money += parcel.perTick;
+                parcel.update();
 
             });
 
@@ -207,9 +222,21 @@ var World = (function () {
 
             state.setParcelCost();
 
+            tickEvents.forEach(function (method) {
+
+                method.call(state);
+
+            });
+
             state.lastTick = new Date();
 
         }
+
+    };
+
+    api.addOnTick = function (method) {
+
+        tickEvents.push(method);
 
     };
 

@@ -14,13 +14,9 @@
 
 1.0.x
 
-* new parcel module separate from world module
-
-buying land parcels:
-* A player can now buy a parcel from three options that are available to buy.
-* 
-
 * time to next game tick bar, will display the amount of time to next game tick
+* tick count for each land parcel
+
 * away production
 * auto save
 
@@ -29,3 +25,14 @@ buying land parcels:
 
 
 
+2.x ideas:
+
+
+* new parcel module separate from world module
+
+Player Object
+* a new player object that contains values such as how much money the player has
+
+Buying Land Parcels:
+* A player should be able to buy a parcel from three options that are available to buy.
+* The values of the options depend on the player object values.
