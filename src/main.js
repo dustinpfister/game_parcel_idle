@@ -55,16 +55,17 @@ var injectParcelUI = function (parcel) {
 
 var updateUI = function () {
 
-    console.log('update ui');
     var parcels = document.getElementsByClassName('parcel_container');
 
     [].forEach.call(parcels, function (parcel) {
 
-        var ticks = document.getElementById('parcel_ticks_' + parcel.id.split('_')[1]);
+        var id = parcel.id.split('_')[1],
+        ticksEL = document.getElementById('parcel_ticks_' + id),
+        tickCount = World.getParcelById(id).ticks;
 
-        ticks.innerHTML = 'ticks: ' + '<br>';
+        ticksEL.innerHTML = 'ticks: ' + tickCount+ '<br>';
 
-        console.log(ticks)
+        console.log()
 
     })
 
