@@ -168,13 +168,14 @@ var World = (function () {
 
     }
 
+	// the main api
     var api = function () {
 
         return state;
 
     };
 
-    //
+    // buy a parcel
     api.buyParcel = function (done) {
 
         var parcel,
@@ -204,6 +205,7 @@ var World = (function () {
 
     };
 
+    // main update method
     api.update = function () {
 
         var now = new Date();
@@ -234,18 +236,20 @@ var World = (function () {
 
     };
 
+    // add an ontick method
     api.addOnTick = function (method) {
 
         tickEvents.push(method);
 
     };
 
+    // get the index of the given parcel
     api.getParcelIndex = function (parcel) {
 
         var i = state.parcels.length;
         while (i--) {
 
-            if (state.parcels[i].id === id) {
+            if (state.parcels[i].id === parcel.id) {
 
                 return i;
 
@@ -257,6 +261,7 @@ var World = (function () {
 
     };
 
+    // get a parcel by id
     api.getParcelById = function (id) {
 
         var i = state.parcels.length;
@@ -274,34 +279,19 @@ var World = (function () {
 
     };
 
+    // sell a parcel by it's given id
     api.sellParcel = function (id) {
 
-        /*
-        var parcel = this.getParcelById(id);
+        var parcel = this.getParcelById(id),
+        i = this.getParcelIndex(parcel);
 
         if (parcel.id) {
 
-        if (parcel.id === id) {
-
-        state.money += state.parcels[i].landValue;
-
-        state.parcels.splice(i, 1);
-
-        }
-
-        }
-         */
-
-        var i = state.parcels.length;
-        while (i--) {
-
-            if (state.parcels[i].id === id) {
+            if (parcel.id === id && i != -1) {
 
                 state.money += state.parcels[i].landValue;
 
                 state.parcels.splice(i, 1);
-
-                return state.parcels[i];
 
             }
 
