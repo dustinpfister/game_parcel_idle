@@ -60,9 +60,11 @@ var updateUI = function () {
 
     [].forEach.call(parcels, function (parcel) {
 
-		var ticks = document.getElementById('parcel_ticks_' + parcel.id.split('_')[1]);
-		
-		console.log(ticks)
+        var ticks = document.getElementById('parcel_ticks_' + parcel.id.split('_')[1]);
+
+        ticks.innerHTML = 'ticks: ' + '<br>';
+
+        console.log(ticks)
 
     })
 

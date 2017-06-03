@@ -240,9 +240,57 @@ var World = (function () {
 
     };
 
-	
-	
+    api.getParcelIndex = function (parcel) {
+
+        var i = state.parcels.length;
+        while (i--) {
+
+            if (state.parcels[i].id === id) {
+
+                return i;
+
+            }
+
+        }
+
+        return -1;
+
+    };
+
+    api.getParcelById = function (id) {
+
+        var i = state.parcels.length;
+        while (i--) {
+
+            if (state.parcels[i].id === id) {
+
+                return state.parcels[i];
+
+            }
+
+        }
+
+        return {};
+
+    };
+
     api.sellParcel = function (id) {
+
+        /*
+        var parcel = this.getParcelById(id);
+
+        if (parcel.id) {
+
+        if (parcel.id === id) {
+
+        state.money += state.parcels[i].landValue;
+
+        state.parcels.splice(i, 1);
+
+        }
+
+        }
+         */
 
         var i = state.parcels.length;
         while (i--) {
